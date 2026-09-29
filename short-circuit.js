@@ -11,32 +11,25 @@ function getUserDisplay(user) {
   return displayName;
 }
 
-// Refactored mit Short-Circuit Evaluation (und Optional Chaining)
+// 1. In einer Zeile mit || und &&
 const getUserDisplayShort = (user) =>
-  user?.nickname || user?.firstName || "Anonymer Nutzer";
-
-// Ohne Optional Chaining, nur mit &&
-const getUserDisplayAnd = (user) =>
   (user && user.nickname) || (user && user.firstName) || "Anonymer Nutzer";
 
-// Tests
-const users = [
-  { nickname: "Neo", firstName: "Thomas" },
-  { firstName: "Thomas" },
-  { nickname: "", firstName: "Thomas" },
-  {},
+// 2. Tests
+const tests = [
+  { nickname: "CoolMax" },
+  { firstName: "Max" },
   null,
-  undefined,
+  { nickname: "" },
 ];
 
-for (const u of users) {
-  console.log(
-    JSON.stringify(u),
-    "->",
-    getUserDisplay(u),
-    "|",
-    getUserDisplayShort(u),
-    "|",
-    getUserDisplayAnd(u)
-  );
+for (const u of tests) {
+  console.log(JSON.stringify(u), "->", getUserDisplay(u), "|", getUserDisplayShort(u));
 }
+
+// 3. { nickname: "" } liefert "Anonymer Nutzer".
+// || prüft auf "falsy", nicht auf "nicht vorhanden". Ein leerer String
+// (genauso 0 oder false) gilt als falsy und wird übersprungen. Ist ein leerer
+// String ein gültiger Wert, geht er so verloren. Dann wäre ?? besser, das
+// überspringt nur null und undefined:
+//   user?.nickname ?? user?.firstName ?? "Anonymer Nutzer"
