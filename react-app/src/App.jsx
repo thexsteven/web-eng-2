@@ -1,5 +1,6 @@
 import UserCard from './components/UserCard/UserCard.jsx'
 import Counter from './components/Counter/Counter.jsx'
+import AlertInput from './components/AlertInput/AlertInput.jsx'
 import './App.css'
 
 const users = [
@@ -16,6 +17,9 @@ function App() {
 
       <h2>Counter</h2>
       <Counter />
+
+      <h2>Eingabe mit Alert</h2>
+      <AlertInput />
 
       {/* Einzelne Instanz mit direkt übergebenen Props */}
       <UserCard
