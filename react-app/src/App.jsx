@@ -1,6 +1,7 @@
 import UserCard from './components/UserCard/UserCard.jsx'
 import Counter from './components/Counter/Counter.jsx'
 import AlertInput from './components/AlertInput/AlertInput.jsx'
+import JokeLoader from './components/JokeLoader/JokeLoader.jsx'
 import './App.css'
 
 const users = [
@@ -20,6 +21,9 @@ function App() {
 
       <h2>Eingabe mit Alert</h2>
       <AlertInput />
+
+      <h2>Zufallswitz</h2>
+      <JokeLoader />
 
       {/* Einzelne Instanz mit direkt übergebenen Props */}
       <UserCard
