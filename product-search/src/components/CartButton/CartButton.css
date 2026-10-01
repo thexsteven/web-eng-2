@@ -1,0 +1,24 @@
+.cart-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 36px;
+  padding: 0;
+  color: var(--accent);
+  background: transparent;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.cart-button:hover {
+  background: var(--accent-soft);
+}
+
+/* Im Warenkorb: gefüllt in Erfolgsfarbe, Icon mit Haken */
+.cart-button.in-cart {
+  color: var(--accent-text);
+  background: var(--success);
+  border-color: var(--success);
+}

@@ -1,0 +1,49 @@
+/* Bild links, Text rechts */
+.product-card {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.product-card-image {
+  flex-shrink: 0;
+  width: 160px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.product-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.product-card-body h2 {
+  margin: 0 0 4px;
+  font-size: 1.15rem;
+}
+
+.product-card-body p {
+  margin: 0 0 12px;
+}
+
+/* Schmale Bildschirme: Bild kleiner, bleibt aber links */
+@media (max-width: 480px) {
+  .product-card-image {
+    width: 96px;
+    height: 72px;
+  }
+}
+
+/* Kopieren-Button und Warenkorb-Icon nebeneinander, am unteren Rand */
+.product-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+}

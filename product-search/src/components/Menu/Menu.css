@@ -1,0 +1,52 @@
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px 24px;
+  padding: 12px 24px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.menu-logo {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.menu-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu-links a {
+  color: var(--text-h);
+  text-decoration: none;
+}
+
+.menu-links a:hover {
+  color: var(--accent);
+}
+
+.menu-cart {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-h);
+}
+
+.menu-cart-count {
+  min-width: 1.5rem;
+  padding: 0 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.5rem;
+  text-align: center;
+  color: var(--accent-text);
+  background: var(--accent);
+  border-radius: 999px;
+}

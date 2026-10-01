@@ -1,0 +1,15 @@
+.copy-button {
+  min-width: 7rem;
+  padding: 6px 14px;
+  font: inherit;
+  color: var(--accent-text);
+  background: var(--accent);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.copy-button:disabled {
+  background: var(--success);
+  cursor: default;
+}

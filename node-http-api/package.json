@@ -1,0 +1,11 @@
+{
+  "name": "node-http-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "HTTP-API mit dem nativen Node.js http-Modul, ohne Frameworks",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  }
+}
