@@ -1,0 +1,41 @@
+.catering {
+  width: 100%;
+  max-width: 600px;
+  text-align: left;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.catering-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.4rem 0;
+  color: var(--text-h);
+}
+
+.catering-row input,
+.catering-row output {
+  width: 10rem;
+  padding: 0.4rem 0.6rem;
+  font: inherit;
+  text-align: right;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+/* Berechnete Felder sind optisch als nicht editierbar erkennbar */
+.catering-row output {
+  background: var(--code-bg);
+}
+
+.catering-row output.under {
+  color: #2e7d32;
+}
+
+.catering-row output.over {
+  color: #c62828;
+}
