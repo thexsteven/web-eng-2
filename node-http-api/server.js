@@ -1,6 +1,11 @@
 const http = require('http')
+const { readFile } = require('fs')
+const path = require('path')
+const { getAbsoluteFSPath } = require('swagger-ui-dist')
+const openApiDocument = require('./openapi.json')
 
 const PORT = process.env.PORT || 3000
+const swaggerUiPath = getAbsoluteFSPath()
 
 // In-Memory-"Datenbank": geht bei jedem Neustart verloren
 const users = [
@@ -12,6 +17,8 @@ let nextId = users.length + 1
 
 const routes = [
   { method: 'GET', path: '/', description: 'Diese Übersicht' },
+  { method: 'GET', path: '/docs', description: 'Interaktive Swagger-UI-Dokumentation' },
+  { method: 'GET', path: '/openapi.json', description: 'OpenAPI-Spezifikation' },
   { method: 'GET', path: '/health', description: 'Status und Laufzeit des Servers' },
   { method: 'GET', path: '/users', description: 'Alle Benutzer' },
   { method: 'GET', path: '/users/:id', description: 'Einzelner Benutzer' },
@@ -47,6 +54,39 @@ function renderOverview() {
     </table>
   </body>
 </html>`
+}
+
+function renderSwaggerUi() {
+  return `<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HTTP-API – Swagger UI</title>
+    <link rel="stylesheet" href="/docs/swagger-ui.css" />
+  </head>
+  <body>
+    <div id="swagger-ui"></div>
+    <script src="/docs/swagger-ui-bundle.js"></script>
+    <script>
+      SwaggerUIBundle({
+        url: '/openapi.json',
+        dom_id: '#swagger-ui',
+        deepLinking: true,
+      })
+    </script>
+  </body>
+</html>`
+}
+
+function sendSwaggerAsset(res, fileName, contentType) {
+  readFile(path.join(swaggerUiPath, fileName), (error, data) => {
+    if (error) {
+      return sendJson(res, 500, { error: 'Swagger-UI-Datei konnte nicht geladen werden' })
+    }
+    res.writeHead(200, { 'Content-Type': contentType })
+    res.end(data)
+  })
 }
 
 // Body kommt in Stücken (Chunks) an, erst bei 'end' ist er vollständig
@@ -96,6 +136,22 @@ const server = http.createServer((req, res) => {
 
   if (method === 'GET' && pathname === '/') {
     return sendHtml(res, 200, renderOverview())
+  }
+
+  if (method === 'GET' && pathname === '/docs') {
+    return sendHtml(res, 200, renderSwaggerUi())
+  }
+
+  if (method === 'GET' && pathname === '/docs/swagger-ui.css') {
+    return sendSwaggerAsset(res, 'swagger-ui.css', 'text/css; charset=utf-8')
+  }
+
+  if (method === 'GET' && pathname === '/docs/swagger-ui-bundle.js') {
+    return sendSwaggerAsset(res, 'swagger-ui-bundle.js', 'text/javascript; charset=utf-8')
+  }
+
+  if (method === 'GET' && pathname === '/openapi.json') {
+    return sendJson(res, 200, openApiDocument)
   }
 
   if (method === 'GET' && pathname === '/health') {
